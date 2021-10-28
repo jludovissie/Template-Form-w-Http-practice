@@ -1,0 +1,58 @@
+<app-header></app-header>
+
+<form (ngModel)="onSubmit(f)" #f="ngForm" >
+  <div 
+        id="user-data" 
+        ngModelGroup="userData"
+        #userData="ngModelGroup">
+  <label for="title">Title:</label>
+  <input 
+        type="text" 
+        id="title" 
+        class="form-control" 
+        ngModel name="title" 
+        required 
+        #title="ngModel">
+
+  <label for="content"> Content: </label>
+  <input  
+        type="text" 
+        id="content" 
+        class="form-control" 
+        ngModel name="content" 
+        required
+        #content="ngModel">
+
+  <label for= "email"> Email: </label>
+  <input 
+        type="text" 
+        id="email" 
+        class="form-control" 
+        #email="ngModel" 
+        ngModel name="email" 
+        required email
+        #email="ngModel"> 
+
+  <button type="submit" (click)="onSubmit()" [disabled]="!f.valid"> Send </button>
+  </div>
+
+  <button (click)="onCreatePost()"> Create Post </button>
+  <button (click)="onFetchPosts()"> Fetch </button>
+  <button> Clear </button>
+
+</form>
+
+
+<span class="help-block" *ngIf="!email.valid && email.touched"> Please Enter a Valid Email Address </span> 
+<span class="help-block" *ngIf="!userData.valid"> Please Enter Your Information </span>
+
+
+<div *ngIf="submitted" > 
+  <hr> 
+<h3> Check your responses </h3>
+<p> Title: {{ user.title }} </p>
+<p> Content: {{ user.content }} </p>
+<p> Email: {{ user.email }} </p>
+
+</div> 
+
